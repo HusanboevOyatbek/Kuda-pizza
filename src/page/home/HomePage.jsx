@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { data } from 'react-router-dom';
 
 function HomePage() {
 
@@ -63,7 +62,7 @@ function HomePage() {
 
 
 
-        <div className="flex gap-[30px] mt-[20px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-5 px-2 mt-5mt-[20px]">
 
           {
             selectCategoryId ? products.filter((p) => p.categoryId === selectCategoryId).map((prod) => (
