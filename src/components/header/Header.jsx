@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { CartContext } from '../../context/CartContext'
 
 function Header() {
+
+  const {cart} = useContext(CartContext);
+  const [sum , setSum] = useState(0)
+
+
+useEffect(() => {
+  cart?.forEach((el) => setSum((prev) => prev + el.basePrice))
+} , [cart])
   return (
+
+    
   
       <header className='py-4 px-3 z-999 flex shadow-md fixed w-full top-0 left-0 bg-white'>
         <div className="flex items-center justify-between  gap-2 container mx-auto px-5">
@@ -55,7 +66,7 @@ function Header() {
 
         <button className="bg-[#FF7010] cursor-pointer flex items-center gap-2 px-3 py-2 rounded-lg shadow-md hover:bg-[#ff8c42] transition-colors duration-200">
           <img className="w-6 h-6" src="/imgs/savacha.png" alt="Savatcha" />
-          <span className="text-white font-semibold text-sm md:text-base">0 $</span>
+          <span className="text-white font-semibold text-sm md:text-base">{Math.ceil(sum)} $</span>
         </button>
 
         <button className='flex lg:hidden cursor-pointer max-w-[28px] w-full outline-none '>
