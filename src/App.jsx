@@ -10,6 +10,7 @@ import ZakuskiPage from './page/zakuski/ZakuskiPage'
 import KomboPage from './page/kombo/KomboPage'
 import DesertPage from './page/desert/DesertPage'
 import SousePage from './page/souse/SousePage'
+import AllProduct from './page/all product/AllProduct'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path='/:id' element={<AllProduct />} />
           <Route path='aksiya' element={<AksiyaPage />} />
           <Route path='pizza' element={<PizzaPage />} />
           <Route path='sushi' element={<SushiPage />} />

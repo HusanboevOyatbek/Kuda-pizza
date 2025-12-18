@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../context/CartContext';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
+import MyImage from '../../components/lazy-load/LazyLoadingImag';
 
 function HomePage() {
 
@@ -54,7 +56,8 @@ function HomePage() {
               onClick={() => setSelectCategoryId(el.id)}
               className="w-[120px] h-[140px] bg-amber-100 rounded-xl p-5 flex flex-col items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-200"
             >
-              <img className="w-12 h-12 mb-2 object-contain" src={el.icon} alt={el.title} />
+              {/* <img className="w-12 h-12 mb-2 object-contain" src={el.icon} alt={el.title} /> */}
+              <MyImage alt={el.title} src={el.icon} className="w-12 h-12 mb-2 object-contain" />
               <h4 className="text-center text-[16px] md:text-[18px] font-semibold mt-1 text-gray-800">
                 {el.title}
               </h4>
@@ -71,12 +74,15 @@ function HomePage() {
               <div
                 className="w-full max-w-[350px] h-[482px] bg-white rounded-3xl p-6 flex flex-col items-center justify-between shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer mx-auto"
               >
-                <div className="w-[300px] flex justify-center items-center h-[300px] mb-4 object-cover">
-                  <img
-                    className="w-full  object-contain rounded-2xl"
-                    src={prod.image}
+                <div className="max-w-[450px] w-full h-[300px] mb-4
+                flex items-center justify-center
+                 rounded-2xl overflow-hidden">
+                  <MyImage
                     alt={prod.title}
+                    src={prod.image}
+                    className="w-full h-full object-contain"
                   />
+
                 </div>
                 <h4 className="text-center text-lg md:text-xl font-semibold text-gray-800 mb-2">
                   {prod.title}
@@ -93,7 +99,7 @@ function HomePage() {
               <div
                 className="relative  max-w-[350px] w-full h-[482px] bg-white rounded-3xl p-6 flex flex-col  justify-between shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer mx-auto"
               >
-                <span className='absolute
+                <span className='absolute z-1
                bg-amber-100
                 p-[10px]
                 rounded
@@ -104,11 +110,19 @@ function HomePage() {
                   }
                 </span>
                 <div className="max-w-[300px] w-full flex justify-center items-center h-[300px] mb-4 object-cover">
-                  <img
+                  {/* <img
                     className="max-w-[300px]  w-full  "
                     src={el1.image}
                     alt={el1.title}
+                  /> */}
+
+                  <MyImage
+                    alt={el1.title}
+                    src={el1.image}
+                    className=" object-contain rounded-2xl"
                   />
+
+
                 </div>
                 <h4 className="text-center text-lg md:text-xl font-semibold text-gray-800 mb-2">
                   {el1.title}
@@ -184,11 +198,20 @@ function HomePage() {
         {
           categoris.map((el) => (
             <div className="">
-              <h4 className=" text-[24px] md:text-[40px] font-bold px-[15px] mt-1 text-[#191919]">
-                {
-                  products.find((pro) => pro.categoryId === el.id) ? el.title : " "
-                }
-              </h4>
+            <div className="flex justify-between items-center mt-10 px-2 ">
+                <h4 className=" text-[24px] md:text-[40px] font-bold px-[15px] mt-1 text-[#191919]">
+                  {
+                    products.find((pro) => pro.categoryId === el.id) ? el.title : " "
+                  }
+                </h4>
+
+                <a className='text-[18px] font-semibold ' href={`/${el.id}`}>
+                  All{" > "}
+                  {
+                    products.find((pro) => pro.categoryId === el.id) ? el.title : " "
+                  }
+                </a>
+            </div>
 
               <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-5 px-2 mt-5">
 
@@ -197,10 +220,10 @@ function HomePage() {
                     className="w-full max-w-[350px] h-[482px] bg-white rounded-3xl p-6 flex flex-col  shadow-lg hover:shadow-2xl transition-shadow duration-300  mx-auto"
                   >
                     <div className="max-w-[300px] w-full flex justify-center items-center h-[300px] mb-4 object-cover">
-                      <img
-                        className="w-full  object-contain rounded-2xl"
-                        src={el3.image}
+                      <MyImage
                         alt={el3.title}
+                        src={el3.image}
+                        className=" object-contain rounded-2xl"
                       />
                     </div>
                     <h4 className="text-center text-lg md:text-xl font-semibold text-gray-800 mb-2">
